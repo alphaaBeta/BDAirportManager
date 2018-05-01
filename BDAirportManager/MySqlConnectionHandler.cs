@@ -11,12 +11,17 @@ namespace BDAirportManager
 	class MySqlConnectionHandler
 	{
 		private MySqlConnection _connection = new MySqlConnection();
-		private DataSet _dataSet = new DataSet();
+		private List<TableConnection> tables = new List<TableConnection>();
 
 		public MySqlConnection Connection { get => _connection; }
-		public DataSet DataSet { get => _dataSet; }
-
-		public ConnectionState ConnectionState { get => _connection.State; } 
+		public ConnectionState ConnectionState { get => _connection.State; }
+		
+		struct TableConnection
+		{
+			public MySqlDataAdapter dataAdapter;
+			public MySqlCommandBuilder commandBuilder;
+			public DataTable dataTable;
+		}
 
 		public bool AttemptConnect(string hostname, int port, string login, string password, string database)
 		{
@@ -44,19 +49,46 @@ namespace BDAirportManager
 			return true;
 		}
 
-		public DataSet LoadNewDataSet(string sqlCommand, string tableName)
+		public DataTable LoadNewData(MySqlCommand sqlCommand, string tableName)
 		{
-			if (!(_dataSet.Tables.Contains(tableName)))
+			//If a table alredy exists, return the data inside
+			if (tables.Any(x => (x.dataTable.TableName == tableName)) == true)
 			{
-				//If table with that name doesn't exist, add one.
-				MySqlDataAdapter mySqlDataAdapter = new MySqlDataAdapter(sqlCommand, Connection);
-				MySqlCommandBuilder commandBuilder = new MySqlCommandBuilder(mySqlDataAdapter);
+				TableConnection aux = tables.Find(x => (x.dataTable.TableName == tableName));
 
-				mySqlDataAdapter.Fill(_dataSet, tableName);
+				sqlCommand.Connection = Connection;
+				aux.dataAdapter.SelectCommand = sqlCommand;
+
+				aux.dataTable.Clear();
+
+				aux.dataAdapter.Fill(aux.dataTable);
+				return aux.dataTable;
 			}
-			//Else just return the dataset.
 			
-			return _dataSet;
+			sqlCommand.Connection = Connection;
+			MySqlDataAdapter mySqlDataAdapter = new MySqlDataAdapter(sqlCommand);
+			MySqlCommandBuilder commandBuilder = new MySqlCommandBuilder(mySqlDataAdapter);
+			DataTable data = new DataTable();
+
+
+			mySqlDataAdapter.Fill(data);
+			data.TableName = tableName;
+
+			TableConnection tableConnection = new TableConnection
+			{
+				dataAdapter = mySqlDataAdapter,
+				commandBuilder = commandBuilder,
+				dataTable = data
+			};
+
+			tables.Add(tableConnection);
+
+			return data;
+		}
+
+		public void UpdateData(DataTable data)
+		{
+
 		}
 	}
 }
