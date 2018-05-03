@@ -49,21 +49,6 @@
 			this.hangarsTab = new System.Windows.Forms.TabPage();
 			this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
 			this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
-			this.groupBox2 = new System.Windows.Forms.GroupBox();
-			this.hangarsUpdateButton = new System.Windows.Forms.Button();
-			this.hangarsRefreshButton = new System.Windows.Forms.Button();
-			this.dataGridView2 = new System.Windows.Forms.DataGridView();
-			this.employeeTab = new System.Windows.Forms.TabPage();
-			this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-			this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
-			this.groupBox3 = new System.Windows.Forms.GroupBox();
-			this.employeesUpdateButton = new System.Windows.Forms.Button();
-			this.employeesRefreshButton = new System.Windows.Forms.Button();
-			this.dataGridView3 = new System.Windows.Forms.DataGridView();
-			this.miscTab = new System.Windows.Forms.TabPage();
-			this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-			this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-			this.toolStripConnectionStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
 			this.groupBox5 = new System.Windows.Forms.GroupBox();
 			this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
 			this.hangarBox3 = new System.Windows.Forms.TextBox();
@@ -72,14 +57,42 @@
 			this.label7 = new System.Windows.Forms.Label();
 			this.label8 = new System.Windows.Forms.Label();
 			this.hangarBox1 = new System.Windows.Forms.TextBox();
+			this.groupBox2 = new System.Windows.Forms.GroupBox();
+			this.hangarsUpdateButton = new System.Windows.Forms.Button();
+			this.hangarsRefreshButton = new System.Windows.Forms.Button();
+			this.dataGridView2 = new System.Windows.Forms.DataGridView();
+			this.employeeTab = new System.Windows.Forms.TabPage();
+			this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+			this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
 			this.groupBox6 = new System.Windows.Forms.GroupBox();
 			this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
-			this.employeeBox3 = new System.Windows.Forms.TextBox();
-			this.employeeBox2 = new System.Windows.Forms.TextBox();
 			this.label5 = new System.Windows.Forms.Label();
 			this.label9 = new System.Windows.Forms.Label();
-			this.label10 = new System.Windows.Forms.Label();
+			this.employeeBox2 = new System.Windows.Forms.TextBox();
 			this.employeeBox1 = new System.Windows.Forms.TextBox();
+			this.groupBox7 = new System.Windows.Forms.GroupBox();
+			this.employeeCheckBox = new System.Windows.Forms.CheckBox();
+			this.pilotCheckBox = new System.Windows.Forms.CheckBox();
+			this.groupBox3 = new System.Windows.Forms.GroupBox();
+			this.employeesUpdateButton = new System.Windows.Forms.Button();
+			this.employeesRefreshButton = new System.Windows.Forms.Button();
+			this.dataGridView3 = new System.Windows.Forms.DataGridView();
+			this.miscTab = new System.Windows.Forms.TabPage();
+			this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
+			this.groupBox10 = new System.Windows.Forms.GroupBox();
+			this.valuesFlowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
+			this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+			this.label10 = new System.Windows.Forms.Label();
+			this.comboBox1 = new System.Windows.Forms.ComboBox();
+			this.groupBox8 = new System.Windows.Forms.GroupBox();
+			this.optionSelectRadioButton1 = new System.Windows.Forms.RadioButton();
+			this.optionSelectRadioButton2 = new System.Windows.Forms.RadioButton();
+			this.optionSelectRadioButton3 = new System.Windows.Forms.RadioButton();
+			this.button1 = new System.Windows.Forms.Button();
+			this.groupBox9 = new System.Windows.Forms.GroupBox();
+			this.whereFlowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
+			this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+			this.toolStripConnectionStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
 			this.tabControl1.SuspendLayout();
 			this.airplanesTab.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
@@ -91,19 +104,25 @@
 			this.hangarsTab.SuspendLayout();
 			this.tableLayoutPanel2.SuspendLayout();
 			this.flowLayoutPanel3.SuspendLayout();
+			this.groupBox5.SuspendLayout();
+			this.tableLayoutPanel5.SuspendLayout();
 			this.groupBox2.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
 			this.employeeTab.SuspendLayout();
 			this.tableLayoutPanel3.SuspendLayout();
 			this.flowLayoutPanel4.SuspendLayout();
+			this.groupBox6.SuspendLayout();
+			this.tableLayoutPanel6.SuspendLayout();
+			this.groupBox7.SuspendLayout();
 			this.groupBox3.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
 			this.miscTab.SuspendLayout();
+			this.tableLayoutPanel7.SuspendLayout();
+			this.groupBox10.SuspendLayout();
+			this.flowLayoutPanel1.SuspendLayout();
+			this.groupBox8.SuspendLayout();
+			this.groupBox9.SuspendLayout();
 			this.statusStrip1.SuspendLayout();
-			this.groupBox5.SuspendLayout();
-			this.tableLayoutPanel5.SuspendLayout();
-			this.groupBox6.SuspendLayout();
-			this.tableLayoutPanel6.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// tabControl1
@@ -351,172 +370,6 @@
 			this.flowLayoutPanel3.Size = new System.Drawing.Size(197, 360);
 			this.flowLayoutPanel3.TabIndex = 1;
 			// 
-			// groupBox2
-			// 
-			this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.groupBox2.AutoSize = true;
-			this.groupBox2.Controls.Add(this.hangarsUpdateButton);
-			this.groupBox2.Controls.Add(this.hangarsRefreshButton);
-			this.groupBox2.Location = new System.Drawing.Point(3, 106);
-			this.groupBox2.Name = "groupBox2";
-			this.groupBox2.Size = new System.Drawing.Size(174, 90);
-			this.groupBox2.TabIndex = 5;
-			this.groupBox2.TabStop = false;
-			this.groupBox2.Text = "Controls";
-			// 
-			// hangarsUpdateButton
-			// 
-			this.hangarsUpdateButton.Location = new System.Drawing.Point(6, 48);
-			this.hangarsUpdateButton.Name = "hangarsUpdateButton";
-			this.hangarsUpdateButton.Size = new System.Drawing.Size(75, 23);
-			this.hangarsUpdateButton.TabIndex = 2;
-			this.hangarsUpdateButton.Text = "Update";
-			this.hangarsUpdateButton.UseVisualStyleBackColor = true;
-			this.hangarsUpdateButton.Click += new System.EventHandler(this.hangarsUpdateButton_Click);
-			// 
-			// hangarsRefreshButton
-			// 
-			this.hangarsRefreshButton.Location = new System.Drawing.Point(6, 19);
-			this.hangarsRefreshButton.Name = "hangarsRefreshButton";
-			this.hangarsRefreshButton.Size = new System.Drawing.Size(75, 23);
-			this.hangarsRefreshButton.TabIndex = 1;
-			this.hangarsRefreshButton.Text = "Refresh";
-			this.hangarsRefreshButton.UseVisualStyleBackColor = true;
-			this.hangarsRefreshButton.Click += new System.EventHandler(this.HangarsRefreshButton_Click);
-			// 
-			// dataGridView2
-			// 
-			this.dataGridView2.AllowUserToAddRows = false;
-			this.dataGridView2.AllowUserToDeleteRows = false;
-			this.dataGridView2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-			this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.dataGridView2.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.dataGridView2.Location = new System.Drawing.Point(3, 3);
-			this.dataGridView2.Name = "dataGridView2";
-			this.dataGridView2.Size = new System.Drawing.Size(600, 360);
-			this.dataGridView2.TabIndex = 0;
-			// 
-			// employeeTab
-			// 
-			this.employeeTab.Controls.Add(this.tableLayoutPanel3);
-			this.employeeTab.Location = new System.Drawing.Point(4, 22);
-			this.employeeTab.Name = "employeeTab";
-			this.employeeTab.Padding = new System.Windows.Forms.Padding(3);
-			this.employeeTab.Size = new System.Drawing.Size(815, 372);
-			this.employeeTab.TabIndex = 2;
-			this.employeeTab.Text = "Employees";
-			this.employeeTab.UseVisualStyleBackColor = true;
-			// 
-			// tableLayoutPanel3
-			// 
-			this.tableLayoutPanel3.ColumnCount = 2;
-			this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 75F));
-			this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-			this.tableLayoutPanel3.Controls.Add(this.flowLayoutPanel4, 0, 0);
-			this.tableLayoutPanel3.Controls.Add(this.dataGridView3, 0, 0);
-			this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 3);
-			this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-			this.tableLayoutPanel3.RowCount = 1;
-			this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.tableLayoutPanel3.Size = new System.Drawing.Size(809, 366);
-			this.tableLayoutPanel3.TabIndex = 1;
-			// 
-			// flowLayoutPanel4
-			// 
-			this.flowLayoutPanel4.Controls.Add(this.groupBox6);
-			this.flowLayoutPanel4.Controls.Add(this.groupBox3);
-			this.flowLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.flowLayoutPanel4.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-			this.flowLayoutPanel4.Location = new System.Drawing.Point(609, 3);
-			this.flowLayoutPanel4.Name = "flowLayoutPanel4";
-			this.flowLayoutPanel4.Size = new System.Drawing.Size(197, 360);
-			this.flowLayoutPanel4.TabIndex = 1;
-			// 
-			// groupBox3
-			// 
-			this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.groupBox3.AutoSize = true;
-			this.groupBox3.Controls.Add(this.employeesUpdateButton);
-			this.groupBox3.Controls.Add(this.employeesRefreshButton);
-			this.groupBox3.Location = new System.Drawing.Point(3, 106);
-			this.groupBox3.Name = "groupBox3";
-			this.groupBox3.Size = new System.Drawing.Size(153, 90);
-			this.groupBox3.TabIndex = 5;
-			this.groupBox3.TabStop = false;
-			this.groupBox3.Text = "Controls";
-			// 
-			// employeesUpdateButton
-			// 
-			this.employeesUpdateButton.Location = new System.Drawing.Point(6, 48);
-			this.employeesUpdateButton.Name = "employeesUpdateButton";
-			this.employeesUpdateButton.Size = new System.Drawing.Size(75, 23);
-			this.employeesUpdateButton.TabIndex = 2;
-			this.employeesUpdateButton.Text = "Update";
-			this.employeesUpdateButton.UseVisualStyleBackColor = true;
-			this.employeesUpdateButton.Click += new System.EventHandler(this.employeesUpdateButton_Click);
-			// 
-			// employeesRefreshButton
-			// 
-			this.employeesRefreshButton.Location = new System.Drawing.Point(6, 19);
-			this.employeesRefreshButton.Name = "employeesRefreshButton";
-			this.employeesRefreshButton.Size = new System.Drawing.Size(75, 23);
-			this.employeesRefreshButton.TabIndex = 1;
-			this.employeesRefreshButton.Text = "Refresh";
-			this.employeesRefreshButton.UseVisualStyleBackColor = true;
-			this.employeesRefreshButton.Click += new System.EventHandler(this.EmployeesRefreshButton_Click);
-			// 
-			// dataGridView3
-			// 
-			this.dataGridView3.AllowUserToAddRows = false;
-			this.dataGridView3.AllowUserToDeleteRows = false;
-			this.dataGridView3.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-			this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.dataGridView3.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.dataGridView3.Location = new System.Drawing.Point(3, 3);
-			this.dataGridView3.Name = "dataGridView3";
-			this.dataGridView3.Size = new System.Drawing.Size(600, 360);
-			this.dataGridView3.TabIndex = 0;
-			// 
-			// miscTab
-			// 
-			this.miscTab.Controls.Add(this.flowLayoutPanel1);
-			this.miscTab.Location = new System.Drawing.Point(4, 22);
-			this.miscTab.Name = "miscTab";
-			this.miscTab.Padding = new System.Windows.Forms.Padding(3);
-			this.miscTab.Size = new System.Drawing.Size(815, 372);
-			this.miscTab.TabIndex = 3;
-			this.miscTab.Text = "Maintenance";
-			this.miscTab.UseVisualStyleBackColor = true;
-			// 
-			// flowLayoutPanel1
-			// 
-			this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-			this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 3);
-			this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-			this.flowLayoutPanel1.Size = new System.Drawing.Size(809, 366);
-			this.flowLayoutPanel1.TabIndex = 0;
-			// 
-			// statusStrip1
-			// 
-			this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripConnectionStatusLabel});
-			this.statusStrip1.Location = new System.Drawing.Point(0, 388);
-			this.statusStrip1.Name = "statusStrip1";
-			this.statusStrip1.Size = new System.Drawing.Size(823, 22);
-			this.statusStrip1.TabIndex = 1;
-			this.statusStrip1.Text = "statusStrip1";
-			// 
-			// toolStripConnectionStatusLabel
-			// 
-			this.toolStripConnectionStatusLabel.ForeColor = System.Drawing.Color.Red;
-			this.toolStripConnectionStatusLabel.Name = "toolStripConnectionStatusLabel";
-			this.toolStripConnectionStatusLabel.Size = new System.Drawing.Size(79, 17);
-			this.toolStripConnectionStatusLabel.Text = "Disconnected";
-			// 
 			// groupBox5
 			// 
 			this.groupBox5.AutoSize = true;
@@ -602,59 +455,123 @@
 			this.hangarBox1.Size = new System.Drawing.Size(100, 20);
 			this.hangarBox1.TabIndex = 5;
 			// 
+			// groupBox2
+			// 
+			this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.groupBox2.AutoSize = true;
+			this.groupBox2.Controls.Add(this.hangarsUpdateButton);
+			this.groupBox2.Controls.Add(this.hangarsRefreshButton);
+			this.groupBox2.Location = new System.Drawing.Point(3, 106);
+			this.groupBox2.Name = "groupBox2";
+			this.groupBox2.Size = new System.Drawing.Size(174, 90);
+			this.groupBox2.TabIndex = 5;
+			this.groupBox2.TabStop = false;
+			this.groupBox2.Text = "Controls";
+			// 
+			// hangarsUpdateButton
+			// 
+			this.hangarsUpdateButton.Location = new System.Drawing.Point(6, 48);
+			this.hangarsUpdateButton.Name = "hangarsUpdateButton";
+			this.hangarsUpdateButton.Size = new System.Drawing.Size(75, 23);
+			this.hangarsUpdateButton.TabIndex = 2;
+			this.hangarsUpdateButton.Text = "Update";
+			this.hangarsUpdateButton.UseVisualStyleBackColor = true;
+			this.hangarsUpdateButton.Click += new System.EventHandler(this.hangarsUpdateButton_Click);
+			// 
+			// hangarsRefreshButton
+			// 
+			this.hangarsRefreshButton.Location = new System.Drawing.Point(6, 19);
+			this.hangarsRefreshButton.Name = "hangarsRefreshButton";
+			this.hangarsRefreshButton.Size = new System.Drawing.Size(75, 23);
+			this.hangarsRefreshButton.TabIndex = 1;
+			this.hangarsRefreshButton.Text = "Refresh";
+			this.hangarsRefreshButton.UseVisualStyleBackColor = true;
+			this.hangarsRefreshButton.Click += new System.EventHandler(this.HangarsRefreshButton_Click);
+			// 
+			// dataGridView2
+			// 
+			this.dataGridView2.AllowUserToAddRows = false;
+			this.dataGridView2.AllowUserToDeleteRows = false;
+			this.dataGridView2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+			this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.dataGridView2.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.dataGridView2.Location = new System.Drawing.Point(3, 3);
+			this.dataGridView2.Name = "dataGridView2";
+			this.dataGridView2.Size = new System.Drawing.Size(600, 360);
+			this.dataGridView2.TabIndex = 0;
+			// 
+			// employeeTab
+			// 
+			this.employeeTab.Controls.Add(this.tableLayoutPanel3);
+			this.employeeTab.Location = new System.Drawing.Point(4, 22);
+			this.employeeTab.Name = "employeeTab";
+			this.employeeTab.Padding = new System.Windows.Forms.Padding(3);
+			this.employeeTab.Size = new System.Drawing.Size(815, 372);
+			this.employeeTab.TabIndex = 2;
+			this.employeeTab.Text = "Workers";
+			this.employeeTab.UseVisualStyleBackColor = true;
+			// 
+			// tableLayoutPanel3
+			// 
+			this.tableLayoutPanel3.ColumnCount = 2;
+			this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 75F));
+			this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+			this.tableLayoutPanel3.Controls.Add(this.flowLayoutPanel4, 0, 0);
+			this.tableLayoutPanel3.Controls.Add(this.dataGridView3, 0, 0);
+			this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 3);
+			this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+			this.tableLayoutPanel3.RowCount = 1;
+			this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.tableLayoutPanel3.Size = new System.Drawing.Size(809, 366);
+			this.tableLayoutPanel3.TabIndex = 1;
+			// 
+			// flowLayoutPanel4
+			// 
+			this.flowLayoutPanel4.Controls.Add(this.groupBox6);
+			this.flowLayoutPanel4.Controls.Add(this.groupBox3);
+			this.flowLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.flowLayoutPanel4.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+			this.flowLayoutPanel4.Location = new System.Drawing.Point(609, 3);
+			this.flowLayoutPanel4.Name = "flowLayoutPanel4";
+			this.flowLayoutPanel4.Size = new System.Drawing.Size(197, 360);
+			this.flowLayoutPanel4.TabIndex = 1;
+			// 
 			// groupBox6
 			// 
-			this.groupBox6.AutoSize = true;
 			this.groupBox6.Controls.Add(this.tableLayoutPanel6);
+			this.groupBox6.Controls.Add(this.groupBox7);
 			this.groupBox6.Location = new System.Drawing.Point(3, 3);
 			this.groupBox6.Name = "groupBox6";
-			this.groupBox6.Size = new System.Drawing.Size(153, 97);
+			this.groupBox6.Size = new System.Drawing.Size(174, 150);
 			this.groupBox6.TabIndex = 8;
 			this.groupBox6.TabStop = false;
 			this.groupBox6.Text = "Filters";
 			// 
 			// tableLayoutPanel6
 			// 
-			this.tableLayoutPanel6.AutoSize = true;
 			this.tableLayoutPanel6.ColumnCount = 2;
 			this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
 			this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.tableLayoutPanel6.Controls.Add(this.employeeBox3, 1, 2);
-			this.tableLayoutPanel6.Controls.Add(this.employeeBox2, 1, 1);
 			this.tableLayoutPanel6.Controls.Add(this.label5, 0, 1);
 			this.tableLayoutPanel6.Controls.Add(this.label9, 0, 0);
-			this.tableLayoutPanel6.Controls.Add(this.label10, 0, 2);
+			this.tableLayoutPanel6.Controls.Add(this.employeeBox2, 1, 1);
 			this.tableLayoutPanel6.Controls.Add(this.employeeBox1, 1, 0);
-			this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Top;
 			this.tableLayoutPanel6.Location = new System.Drawing.Point(3, 16);
 			this.tableLayoutPanel6.Name = "tableLayoutPanel6";
-			this.tableLayoutPanel6.RowCount = 4;
-			this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel6.Size = new System.Drawing.Size(147, 78);
-			this.tableLayoutPanel6.TabIndex = 0;
-			// 
-			// employeeBox3
-			// 
-			this.employeeBox3.Location = new System.Drawing.Point(44, 55);
-			this.employeeBox3.Name = "employeeBox3";
-			this.employeeBox3.Size = new System.Drawing.Size(100, 20);
-			this.employeeBox3.TabIndex = 7;
-			// 
-			// employeeBox2
-			// 
-			this.employeeBox2.Location = new System.Drawing.Point(44, 29);
-			this.employeeBox2.Name = "employeeBox2";
-			this.employeeBox2.Size = new System.Drawing.Size(100, 20);
-			this.employeeBox2.TabIndex = 6;
+			this.tableLayoutPanel6.RowCount = 2;
+			this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.tableLayoutPanel6.Size = new System.Drawing.Size(168, 51);
+			this.tableLayoutPanel6.TabIndex = 10;
 			// 
 			// label5
 			// 
 			this.label5.Anchor = System.Windows.Forms.AnchorStyles.Left;
 			this.label5.AutoSize = true;
-			this.label5.Location = new System.Drawing.Point(3, 32);
+			this.label5.Location = new System.Drawing.Point(3, 31);
 			this.label5.Name = "label5";
 			this.label5.Size = new System.Drawing.Size(35, 13);
 			this.label5.TabIndex = 2;
@@ -670,15 +587,12 @@
 			this.label9.TabIndex = 0;
 			this.label9.Text = "Pesel";
 			// 
-			// label10
+			// employeeBox2
 			// 
-			this.label10.Anchor = System.Windows.Forms.AnchorStyles.Left;
-			this.label10.AutoSize = true;
-			this.label10.Location = new System.Drawing.Point(3, 58);
-			this.label10.Name = "label10";
-			this.label10.Size = new System.Drawing.Size(24, 13);
-			this.label10.TabIndex = 3;
-			this.label10.Text = "Job";
+			this.employeeBox2.Location = new System.Drawing.Point(44, 28);
+			this.employeeBox2.Name = "employeeBox2";
+			this.employeeBox2.Size = new System.Drawing.Size(100, 20);
+			this.employeeBox2.TabIndex = 6;
 			// 
 			// employeeBox1
 			// 
@@ -686,6 +600,267 @@
 			this.employeeBox1.Name = "employeeBox1";
 			this.employeeBox1.Size = new System.Drawing.Size(100, 20);
 			this.employeeBox1.TabIndex = 5;
+			// 
+			// groupBox7
+			// 
+			this.groupBox7.AutoSize = true;
+			this.groupBox7.Controls.Add(this.employeeCheckBox);
+			this.groupBox7.Controls.Add(this.pilotCheckBox);
+			this.groupBox7.Dock = System.Windows.Forms.DockStyle.Bottom;
+			this.groupBox7.Location = new System.Drawing.Point(3, 72);
+			this.groupBox7.Name = "groupBox7";
+			this.groupBox7.Size = new System.Drawing.Size(168, 75);
+			this.groupBox7.TabIndex = 9;
+			this.groupBox7.TabStop = false;
+			this.groupBox7.Text = "Job";
+			// 
+			// employeeCheckBox
+			// 
+			this.employeeCheckBox.AutoSize = true;
+			this.employeeCheckBox.Location = new System.Drawing.Point(3, 39);
+			this.employeeCheckBox.Name = "employeeCheckBox";
+			this.employeeCheckBox.Size = new System.Drawing.Size(72, 17);
+			this.employeeCheckBox.TabIndex = 1;
+			this.employeeCheckBox.Text = "Employee";
+			this.employeeCheckBox.UseVisualStyleBackColor = true;
+			// 
+			// pilotCheckBox
+			// 
+			this.pilotCheckBox.AutoSize = true;
+			this.pilotCheckBox.Location = new System.Drawing.Point(3, 16);
+			this.pilotCheckBox.Name = "pilotCheckBox";
+			this.pilotCheckBox.Size = new System.Drawing.Size(46, 17);
+			this.pilotCheckBox.TabIndex = 0;
+			this.pilotCheckBox.Text = "Pilot";
+			this.pilotCheckBox.UseVisualStyleBackColor = true;
+			// 
+			// groupBox3
+			// 
+			this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.groupBox3.AutoSize = true;
+			this.groupBox3.Controls.Add(this.employeesUpdateButton);
+			this.groupBox3.Controls.Add(this.employeesRefreshButton);
+			this.groupBox3.Location = new System.Drawing.Point(3, 159);
+			this.groupBox3.Name = "groupBox3";
+			this.groupBox3.Size = new System.Drawing.Size(174, 90);
+			this.groupBox3.TabIndex = 5;
+			this.groupBox3.TabStop = false;
+			this.groupBox3.Text = "Controls";
+			// 
+			// employeesUpdateButton
+			// 
+			this.employeesUpdateButton.Location = new System.Drawing.Point(6, 48);
+			this.employeesUpdateButton.Name = "employeesUpdateButton";
+			this.employeesUpdateButton.Size = new System.Drawing.Size(75, 23);
+			this.employeesUpdateButton.TabIndex = 2;
+			this.employeesUpdateButton.Text = "Update";
+			this.employeesUpdateButton.UseVisualStyleBackColor = true;
+			this.employeesUpdateButton.Click += new System.EventHandler(this.employeesUpdateButton_Click);
+			// 
+			// employeesRefreshButton
+			// 
+			this.employeesRefreshButton.Location = new System.Drawing.Point(6, 19);
+			this.employeesRefreshButton.Name = "employeesRefreshButton";
+			this.employeesRefreshButton.Size = new System.Drawing.Size(75, 23);
+			this.employeesRefreshButton.TabIndex = 1;
+			this.employeesRefreshButton.Text = "Refresh";
+			this.employeesRefreshButton.UseVisualStyleBackColor = true;
+			this.employeesRefreshButton.Click += new System.EventHandler(this.EmployeesRefreshButton_Click);
+			// 
+			// dataGridView3
+			// 
+			this.dataGridView3.AllowUserToAddRows = false;
+			this.dataGridView3.AllowUserToDeleteRows = false;
+			this.dataGridView3.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+			this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.dataGridView3.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.dataGridView3.Location = new System.Drawing.Point(3, 3);
+			this.dataGridView3.Name = "dataGridView3";
+			this.dataGridView3.Size = new System.Drawing.Size(600, 360);
+			this.dataGridView3.TabIndex = 0;
+			// 
+			// miscTab
+			// 
+			this.miscTab.Controls.Add(this.tableLayoutPanel7);
+			this.miscTab.Location = new System.Drawing.Point(4, 22);
+			this.miscTab.Name = "miscTab";
+			this.miscTab.Padding = new System.Windows.Forms.Padding(3);
+			this.miscTab.Size = new System.Drawing.Size(815, 372);
+			this.miscTab.TabIndex = 3;
+			this.miscTab.Text = "Maintenance";
+			this.miscTab.UseVisualStyleBackColor = true;
+			// 
+			// tableLayoutPanel7
+			// 
+			this.tableLayoutPanel7.ColumnCount = 2;
+			this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
+			this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+			this.tableLayoutPanel7.Controls.Add(this.groupBox10, 1, 0);
+			this.tableLayoutPanel7.Controls.Add(this.flowLayoutPanel1, 0, 0);
+			this.tableLayoutPanel7.Controls.Add(this.groupBox9, 1, 1);
+			this.tableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.tableLayoutPanel7.Location = new System.Drawing.Point(3, 3);
+			this.tableLayoutPanel7.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
+			this.tableLayoutPanel7.Name = "tableLayoutPanel7";
+			this.tableLayoutPanel7.RowCount = 2;
+			this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.tableLayoutPanel7.Size = new System.Drawing.Size(809, 366);
+			this.tableLayoutPanel7.TabIndex = 0;
+			// 
+			// groupBox10
+			// 
+			this.groupBox10.Controls.Add(this.valuesFlowLayoutPanel);
+			this.groupBox10.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.groupBox10.Enabled = false;
+			this.groupBox10.Location = new System.Drawing.Point(123, 3);
+			this.groupBox10.Name = "groupBox10";
+			this.groupBox10.Size = new System.Drawing.Size(683, 177);
+			this.groupBox10.TabIndex = 3;
+			this.groupBox10.TabStop = false;
+			this.groupBox10.Text = "Values";
+			// 
+			// valuesFlowLayoutPanel
+			// 
+			this.valuesFlowLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.valuesFlowLayoutPanel.Location = new System.Drawing.Point(3, 16);
+			this.valuesFlowLayoutPanel.Name = "valuesFlowLayoutPanel";
+			this.valuesFlowLayoutPanel.Size = new System.Drawing.Size(677, 158);
+			this.valuesFlowLayoutPanel.TabIndex = 0;
+			// 
+			// flowLayoutPanel1
+			// 
+			this.flowLayoutPanel1.Controls.Add(this.label10);
+			this.flowLayoutPanel1.Controls.Add(this.comboBox1);
+			this.flowLayoutPanel1.Controls.Add(this.groupBox8);
+			this.flowLayoutPanel1.Controls.Add(this.button1);
+			this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+			this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 3);
+			this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+			this.tableLayoutPanel7.SetRowSpan(this.flowLayoutPanel1, 2);
+			this.flowLayoutPanel1.Size = new System.Drawing.Size(114, 360);
+			this.flowLayoutPanel1.TabIndex = 0;
+			// 
+			// label10
+			// 
+			this.label10.AutoSize = true;
+			this.label10.Location = new System.Drawing.Point(3, 0);
+			this.label10.Name = "label10";
+			this.label10.Size = new System.Drawing.Size(82, 13);
+			this.label10.TabIndex = 4;
+			this.label10.Text = "Table to modify:";
+			// 
+			// comboBox1
+			// 
+			this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.comboBox1.FormattingEnabled = true;
+			this.comboBox1.Items.AddRange(new object[] {
+            "airplane",
+            "hangar",
+            "pilot",
+            "employee"});
+			this.comboBox1.Location = new System.Drawing.Point(3, 16);
+			this.comboBox1.Name = "comboBox1";
+			this.comboBox1.Size = new System.Drawing.Size(102, 21);
+			this.comboBox1.TabIndex = 0;
+			this.comboBox1.SelectedValueChanged += new System.EventHandler(this.comboBox1_SelectedValueChanged);
+			// 
+			// groupBox8
+			// 
+			this.groupBox8.Controls.Add(this.optionSelectRadioButton1);
+			this.groupBox8.Controls.Add(this.optionSelectRadioButton2);
+			this.groupBox8.Controls.Add(this.optionSelectRadioButton3);
+			this.groupBox8.Location = new System.Drawing.Point(3, 43);
+			this.groupBox8.Name = "groupBox8";
+			this.groupBox8.Size = new System.Drawing.Size(102, 100);
+			this.groupBox8.TabIndex = 5;
+			this.groupBox8.TabStop = false;
+			this.groupBox8.Text = "Action";
+			// 
+			// optionSelectRadioButton1
+			// 
+			this.optionSelectRadioButton1.AutoSize = true;
+			this.optionSelectRadioButton1.Location = new System.Drawing.Point(5, 19);
+			this.optionSelectRadioButton1.Name = "optionSelectRadioButton1";
+			this.optionSelectRadioButton1.Size = new System.Drawing.Size(51, 17);
+			this.optionSelectRadioButton1.TabIndex = 1;
+			this.optionSelectRadioButton1.TabStop = true;
+			this.optionSelectRadioButton1.Text = "Insert";
+			this.optionSelectRadioButton1.UseVisualStyleBackColor = true;
+			this.optionSelectRadioButton1.CheckedChanged += new System.EventHandler(this.OptionSelectRadioButton1_CheckedChanged);
+			// 
+			// optionSelectRadioButton2
+			// 
+			this.optionSelectRadioButton2.AutoSize = true;
+			this.optionSelectRadioButton2.Location = new System.Drawing.Point(5, 42);
+			this.optionSelectRadioButton2.Name = "optionSelectRadioButton2";
+			this.optionSelectRadioButton2.Size = new System.Drawing.Size(60, 17);
+			this.optionSelectRadioButton2.TabIndex = 2;
+			this.optionSelectRadioButton2.TabStop = true;
+			this.optionSelectRadioButton2.Text = "Update";
+			this.optionSelectRadioButton2.UseVisualStyleBackColor = true;
+			this.optionSelectRadioButton2.CheckedChanged += new System.EventHandler(this.OptionSelectRadioButton2_CheckedChanged);
+			// 
+			// optionSelectRadioButton3
+			// 
+			this.optionSelectRadioButton3.AutoSize = true;
+			this.optionSelectRadioButton3.Location = new System.Drawing.Point(5, 65);
+			this.optionSelectRadioButton3.Name = "optionSelectRadioButton3";
+			this.optionSelectRadioButton3.Size = new System.Drawing.Size(56, 17);
+			this.optionSelectRadioButton3.TabIndex = 3;
+			this.optionSelectRadioButton3.TabStop = true;
+			this.optionSelectRadioButton3.Text = "Delete";
+			this.optionSelectRadioButton3.UseVisualStyleBackColor = true;
+			this.optionSelectRadioButton3.CheckedChanged += new System.EventHandler(this.OptionSelectRadioButton3_CheckedChanged);
+			// 
+			// button1
+			// 
+			this.button1.Location = new System.Drawing.Point(3, 149);
+			this.button1.Name = "button1";
+			this.button1.Size = new System.Drawing.Size(75, 23);
+			this.button1.TabIndex = 6;
+			this.button1.Text = "Do it!";
+			this.button1.UseVisualStyleBackColor = true;
+			this.button1.Click += new System.EventHandler(this.Button1_Click);
+			// 
+			// groupBox9
+			// 
+			this.groupBox9.Controls.Add(this.whereFlowLayoutPanel);
+			this.groupBox9.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.groupBox9.Enabled = false;
+			this.groupBox9.Location = new System.Drawing.Point(123, 186);
+			this.groupBox9.Name = "groupBox9";
+			this.groupBox9.Size = new System.Drawing.Size(683, 177);
+			this.groupBox9.TabIndex = 2;
+			this.groupBox9.TabStop = false;
+			this.groupBox9.Text = "Conditions";
+			// 
+			// whereFlowLayoutPanel
+			// 
+			this.whereFlowLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.whereFlowLayoutPanel.Location = new System.Drawing.Point(3, 16);
+			this.whereFlowLayoutPanel.Name = "whereFlowLayoutPanel";
+			this.whereFlowLayoutPanel.Size = new System.Drawing.Size(677, 158);
+			this.whereFlowLayoutPanel.TabIndex = 1;
+			// 
+			// statusStrip1
+			// 
+			this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripConnectionStatusLabel});
+			this.statusStrip1.Location = new System.Drawing.Point(0, 388);
+			this.statusStrip1.Name = "statusStrip1";
+			this.statusStrip1.Size = new System.Drawing.Size(823, 22);
+			this.statusStrip1.TabIndex = 1;
+			this.statusStrip1.Text = "statusStrip1";
+			// 
+			// toolStripConnectionStatusLabel
+			// 
+			this.toolStripConnectionStatusLabel.ForeColor = System.Drawing.Color.Red;
+			this.toolStripConnectionStatusLabel.Name = "toolStripConnectionStatusLabel";
+			this.toolStripConnectionStatusLabel.Size = new System.Drawing.Size(79, 17);
+			this.toolStripConnectionStatusLabel.Text = "Disconnected";
 			// 
 			// MainScene
 			// 
@@ -712,25 +887,34 @@
 			this.tableLayoutPanel2.ResumeLayout(false);
 			this.flowLayoutPanel3.ResumeLayout(false);
 			this.flowLayoutPanel3.PerformLayout();
+			this.groupBox5.ResumeLayout(false);
+			this.groupBox5.PerformLayout();
+			this.tableLayoutPanel5.ResumeLayout(false);
+			this.tableLayoutPanel5.PerformLayout();
 			this.groupBox2.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
 			this.employeeTab.ResumeLayout(false);
 			this.tableLayoutPanel3.ResumeLayout(false);
 			this.flowLayoutPanel4.ResumeLayout(false);
 			this.flowLayoutPanel4.PerformLayout();
-			this.groupBox3.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
-			this.miscTab.ResumeLayout(false);
-			this.statusStrip1.ResumeLayout(false);
-			this.statusStrip1.PerformLayout();
-			this.groupBox5.ResumeLayout(false);
-			this.groupBox5.PerformLayout();
-			this.tableLayoutPanel5.ResumeLayout(false);
-			this.tableLayoutPanel5.PerformLayout();
 			this.groupBox6.ResumeLayout(false);
 			this.groupBox6.PerformLayout();
 			this.tableLayoutPanel6.ResumeLayout(false);
 			this.tableLayoutPanel6.PerformLayout();
+			this.groupBox7.ResumeLayout(false);
+			this.groupBox7.PerformLayout();
+			this.groupBox3.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
+			this.miscTab.ResumeLayout(false);
+			this.tableLayoutPanel7.ResumeLayout(false);
+			this.groupBox10.ResumeLayout(false);
+			this.flowLayoutPanel1.ResumeLayout(false);
+			this.flowLayoutPanel1.PerformLayout();
+			this.groupBox8.ResumeLayout(false);
+			this.groupBox8.PerformLayout();
+			this.groupBox9.ResumeLayout(false);
+			this.statusStrip1.ResumeLayout(false);
+			this.statusStrip1.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -749,7 +933,6 @@
 		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
 		private System.Windows.Forms.DataGridView dataGridView3;
 		private System.Windows.Forms.TabPage miscTab;
-		private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
 		private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
 		private System.Windows.Forms.Button airplanesRefreshButton;
 		private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel3;
@@ -783,13 +966,27 @@
 		private System.Windows.Forms.Label label8;
 		private System.Windows.Forms.TextBox hangarBox1;
 		private System.Windows.Forms.GroupBox groupBox6;
-		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
-		private System.Windows.Forms.TextBox employeeBox3;
+		private System.Windows.Forms.Label label9;
+		private System.Windows.Forms.TextBox employeeBox1;
 		private System.Windows.Forms.TextBox employeeBox2;
 		private System.Windows.Forms.Label label5;
-		private System.Windows.Forms.Label label9;
+		private System.Windows.Forms.GroupBox groupBox7;
+		private System.Windows.Forms.CheckBox employeeCheckBox;
+		private System.Windows.Forms.CheckBox pilotCheckBox;
+		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
+		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel7;
+		private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+		private System.Windows.Forms.ComboBox comboBox1;
+		private System.Windows.Forms.RadioButton optionSelectRadioButton1;
+		private System.Windows.Forms.RadioButton optionSelectRadioButton2;
+		private System.Windows.Forms.RadioButton optionSelectRadioButton3;
 		private System.Windows.Forms.Label label10;
-		private System.Windows.Forms.TextBox employeeBox1;
+		private System.Windows.Forms.GroupBox groupBox8;
+		private System.Windows.Forms.GroupBox groupBox10;
+		private System.Windows.Forms.Button button1;
+		private System.Windows.Forms.GroupBox groupBox9;
+		private System.Windows.Forms.FlowLayoutPanel valuesFlowLayoutPanel;
+		private System.Windows.Forms.FlowLayoutPanel whereFlowLayoutPanel;
 	}
 }
 

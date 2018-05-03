@@ -49,6 +49,12 @@ namespace BDAirportManager
 			return true;
 		}
 
+		public object PerformQuery(MySqlCommand sqlCommand)
+		{
+			sqlCommand.Connection = Connection;
+			return(sqlCommand.ExecuteScalar());
+		}
+
 		public DataTable LoadNewData(MySqlCommand sqlCommand, string tableName)
 		{
 			//If a table alredy exists, return the data inside

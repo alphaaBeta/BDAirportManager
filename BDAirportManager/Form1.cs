@@ -98,14 +98,21 @@ namespace BDAirportManager
 
 		}
 
-		private void UpdateDataGrid(DataGridView dataGrid, MySqlCommand sqlcomm, string tableName)
+		private DataTable UpdateDataGridOrGetDataTable(MySqlCommand sqlcomm, string tableName, DataGridView dataGrid = null)
 		{
-			dataGrid.DataSource = sqlConnectionHandler.LoadNewData(sqlcomm, tableName);
+			if (dataGrid == null)
+			{
+				return sqlConnectionHandler.LoadNewData(sqlcomm, tableName);
+			}
+			else
+			{
+				dataGrid.DataSource = sqlConnectionHandler.LoadNewData(sqlcomm, tableName);
 
-			dataGrid.Update();
-			dataGrid.Refresh();
+				dataGrid.Update();
+				dataGrid.Refresh();
+				return null;
+			}
 		}
-
 
 		private void AirplanesRefreshButton_Click(object sender, EventArgs e)
 		{
@@ -138,7 +145,7 @@ namespace BDAirportManager
 			}
 
 			//Force an update with new command. This will download the data again.
-			UpdateDataGrid(dataGridView1, sqlCommand, "Airplane");
+			UpdateDataGridOrGetDataTable(sqlCommand, "Airplane", dataGridView1);
 		}
 
 		private void HangarsRefreshButton_Click(object sender, EventArgs e)
@@ -164,15 +171,27 @@ namespace BDAirportManager
 			}
 
 
-			UpdateDataGrid(dataGridView2, sqlCommand, "Hangar");
+			UpdateDataGridOrGetDataTable(sqlCommand, "Hangar", dataGridView2);
 		}
 
 		private void EmployeesRefreshButton_Click(object sender, EventArgs e)
 		{
+			string CmdText = null;
+			
+			if (pilotCheckBox.Checked && !employeeCheckBox.Checked)
+			{
+				CmdText = "SELECT * FROM person RIGHT JOIN pilot ON person.pesel = pilot.pesel";
+			}
+			else if (!pilotCheckBox.Checked && employeeCheckBox.Checked)
+			{
+				CmdText = "SELECT * FROM person RIGHT JOIN employee ON person.pesel = employee.pesel";
+			}
+			else
+			{
+				CmdText = "SELECT pesel, name, address_city, phone, address_street, address_homenumber FROM person";
+			}
 
-			MySqlCommand sqlCommand = new MySqlCommand(
-				"SELECT pesel, name, address_city, phone, address_street, address_homenumber FROM person");
-
+			MySqlCommand sqlCommand = new MySqlCommand(CmdText);
 
 			if (!string.IsNullOrEmpty(employeeBox1.Text))
 			{
@@ -182,12 +201,9 @@ namespace BDAirportManager
 			{
 				sqlCommand.AddWhereParameterClause("name", "@Name", employeeBox2.Text);
 			}
-			if (!string.IsNullOrEmpty(employeeBox3.Text))
-			{
-				//TODO:
-			}
+			
 
-			UpdateDataGrid(dataGridView3, sqlCommand, "Emplloyee");
+			UpdateDataGridOrGetDataTable(sqlCommand, "Employee", dataGridView3);
 		}
 
 		private void airplanesUpdateButton_Click(object sender, EventArgs e)
@@ -208,6 +224,209 @@ namespace BDAirportManager
 		private void MainScene_FormClosing(object sender, FormClosingEventArgs e)
 		{
 			statusLabelUpdater.Abort();
+		}
+
+		struct ColumnMod
+		{
+			public string columnName;
+			public Label valueLabel;
+			public Label whereLabel;
+			public TextBox valueTextBox;
+			public TextBox whereTextBox;
+			public Panel valuePanel;
+			public Panel wherePanel;
+		}
+
+		private List<ColumnMod> columnMods = new List<ColumnMod>();
+
+		private void comboBox1_SelectedValueChanged(object sender, EventArgs e)
+		{
+			string tableName = comboBox1.Text;
+			string CmdText = null;
+
+			if (columnMods.Any())
+			{
+				foreach (var item in columnMods)
+				{
+					//Remove controls
+					item.valuePanel.Controls.Remove(item.valueLabel);
+					item.wherePanel.Controls.Remove(item.whereLabel);
+					item.valuePanel.Controls.Remove(item.valueTextBox);
+					item.wherePanel.Controls.Remove(item.whereTextBox);
+					valuesFlowLayoutPanel.Controls.Remove(item.valuePanel);
+					whereFlowLayoutPanel.Controls.Remove(item.wherePanel);
+
+					item.valueLabel.Dispose();
+					item.whereLabel.Dispose();
+					item.valueTextBox.Dispose();
+					item.whereTextBox.Dispose();
+					item.valuePanel.Dispose();
+					item.wherePanel.Dispose();
+				}
+
+				columnMods.Clear();
+			}
+
+			if (tableName.Equals("pilot"))
+			{
+				CmdText = "SELECT * FROM pilot JOIN person";
+			}
+			else if (tableName.Equals("employee"))
+			{
+				CmdText = "SELECT * FROM employee JOIN person";
+			}
+			else
+			{
+				CmdText = "SELECT * FROM " + tableName;
+			}
+
+			MySqlCommand sqlCommand = new MySqlCommand(CmdText);
+
+			DataTable dataTable = UpdateDataGridOrGetDataTable(sqlCommand, tableName);
+			columnMods = new List<ColumnMod>();
+
+			foreach (DataColumn item in dataTable.Columns)
+			{
+				//Create two labels, one for value, one for where section
+				Label valueLabel = new Label();
+				valueLabel.Text = item.ColumnName;
+
+				Label whereLabel = new Label();
+				whereLabel.Text = item.ColumnName;
+
+				TextBox valueTextBox = new TextBox();
+				TextBox whereTextBox = new TextBox();
+
+				valueTextBox.Dock = DockStyle.Bottom;
+				whereTextBox.Dock = DockStyle.Bottom;
+
+				Panel valuePanel = new Panel();
+				Panel wherePanel = new Panel();
+
+				valuePanel.Controls.Add(valueLabel);
+				valuePanel.Controls.Add(valueTextBox);
+
+				wherePanel.Controls.Add(whereLabel);
+				wherePanel.Controls.Add(whereTextBox);
+
+				valuePanel.Width = 135;
+				valuePanel.Height = 45;
+
+				wherePanel.Width = 135;
+				wherePanel.Height = 45;
+
+				ColumnMod columnMod = new ColumnMod
+				{
+					columnName = item.ColumnName,
+					valueTextBox = valueTextBox,
+					whereTextBox = whereTextBox,
+
+					valueLabel = valueLabel,
+					whereLabel = whereLabel,
+
+					valuePanel = valuePanel,
+					wherePanel = wherePanel
+				};
+
+				//Add everything to flow panels
+				valuesFlowLayoutPanel.Controls.Add(valuePanel);
+				whereFlowLayoutPanel.Controls.Add(wherePanel);
+
+
+				columnMods.Add(columnMod);
+			}
+		}
+
+		private void OptionSelectRadioButton1_CheckedChanged(object sender, EventArgs e)
+		{
+			if (optionSelectRadioButton1.Checked)
+			{
+				//On insert, disable the where container and enable the values container.
+				groupBox9.Enabled = false;
+				groupBox10.Enabled = true;
+			}
+
+		}
+
+		private void OptionSelectRadioButton2_CheckedChanged(object sender, EventArgs e)
+		{
+			if (optionSelectRadioButton2.Checked)
+			{
+				//On update, enable both containers
+				groupBox9.Enabled = true;
+				groupBox10.Enabled = true;
+			}
+		}
+
+		private void OptionSelectRadioButton3_CheckedChanged(object sender, EventArgs e)
+		{
+			if (optionSelectRadioButton3.Checked)
+			{
+				//On delete, only enable the where container
+				groupBox9.Enabled = true;
+				groupBox10.Enabled = false;
+			}
+
+		}
+
+		private void Button1_Click(object sender, EventArgs e)
+		{
+			string tableName = comboBox1.Text;
+			StringBuilder CmdText = new StringBuilder();
+			MySqlCommand sqlCommand = null;
+
+			if (tableName.Equals("pilot") || tableName.Equals("employee"))
+			{
+				//If a double-table has been selected, everything has to happen for each table
+			}
+			else
+			{
+				if (optionSelectRadioButton1.Checked == true)
+				{
+					//Handle INSERT statement
+					CmdText.Append("INSERT INTO " + tableName + "(");
+
+					//Start bulding values part
+					StringBuilder ValuesString = new StringBuilder("VALUES (");
+
+					//Add names of all columns and values
+					foreach (ColumnMod column in columnMods)
+					{
+						if (columnMods.First().Equals(column))
+						{
+							CmdText.Append(column.columnName);
+							ValuesString.Append("\"" + column.valueTextBox.Text + "\"");
+							continue;
+						}
+						
+						CmdText.Append("," + column.columnName);
+						ValuesString.Append(",\"" + column.valueTextBox.Text + "\"");
+					}
+
+					//Add closing brace and connect two strings together
+					CmdText.Append(") ");
+					ValuesString.Append(");");
+
+					CmdText.Append(ValuesString.ToString());
+				}
+				else if (optionSelectRadioButton2.Checked)
+				{
+					//Handle UPDATE statement
+				}
+				else if (optionSelectRadioButton3.Checked)
+				{
+					//Handle DELETE statement
+				}
+				else
+				{ 
+					//can't happen 
+				}
+
+				//Once command is ready, build the MySqlCommand object
+				sqlCommand = new MySqlCommand(CmdText.ToString());
+				sqlConnectionHandler.PerformQuery(sqlCommand);
+			}
+
 		}
 	}
 
