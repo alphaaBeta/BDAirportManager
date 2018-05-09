@@ -1,43 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using MySql.Data;
 using MySql.Data.MySqlClient;
 
 namespace BDAirportManager
 {
 	public partial class MainScene : Form
 	{
-		MySqlConnectionHandler sqlConnectionHandler = null;
+	    readonly MySqlConnectionHandler _sqlConnectionHandler = null;
 
-		private Thread statusLabelUpdater = null;
+		private readonly Thread _statusLabelUpdater = null;
 
 		public MainScene()
 		{
 			InitializeComponent();
-			sqlConnectionHandler = new MySqlConnectionHandler();
+			_sqlConnectionHandler = new MySqlConnectionHandler();
 
-			sqlConnectionHandler.AttemptConnect("lab-bd-01.mysql.database.azure.com",
+			_sqlConnectionHandler.AttemptConnect("lab-bd-01.mysql.database.azure.com",
 													3306,
 													"sqladmin@lab-bd-01",
 													"Qt314iHjg",
 													"mydb");
 
 
-			statusLabelUpdater = new Thread(() =>
+			_statusLabelUpdater = new Thread(() =>
 			{
-				ConnectionState tabState = ConnectionState.Closed;
-				ConnectionState auxState;
+				var tabState = ConnectionState.Closed;
 
-				//Method to change status on the status tab
-				void changeStatusBar(Color color, string text, bool disableForm)
+			    //Method to change status on the status tab
+				void ChangeStatusBar(Color color, string text, bool disableForm)
 				{
 					Invoke(new Action(() =>
 					{
@@ -49,38 +45,37 @@ namespace BDAirportManager
 
 				while (true)
 				{
-					auxState = sqlConnectionHandler.ConnectionState;
+					var auxState = _sqlConnectionHandler.ConnectionState;
 
-					if (!(auxState == tabState))
+					if (auxState != tabState)
 					{
-						//If current connection is other than the one on status tab, then
+					    //If current connection is other than the one on status tab, then
 
-						if (auxState == ConnectionState.Open)
-						{
-							changeStatusBar(Color.Blue, "Connected", false);
+					    switch (auxState)
+					    {
+					        case ConnectionState.Open:
+					            ChangeStatusBar(Color.Blue, "Connected", false);
 
-							tabState = ConnectionState.Open;
-						}
-						else if (auxState == ConnectionState.Fetching ||
-								auxState == ConnectionState.Executing ||
-								auxState == ConnectionState.Connecting)
-						{
-							changeStatusBar(Color.DarkGreen, "Working", false);
+					            tabState = ConnectionState.Open;
+					            break;
+					        case ConnectionState.Fetching:
+					        case ConnectionState.Executing:
+					        case ConnectionState.Connecting:
+					            ChangeStatusBar(Color.DarkGreen, "Working", false);
 
-							tabState = ConnectionState.Executing;
-						}
-						else if (auxState == ConnectionState.Closed)
-						{
-							changeStatusBar(Color.Red, "Disconnected", true);
+					            tabState = ConnectionState.Executing;
+					            break;
+					        case ConnectionState.Closed:
+					            ChangeStatusBar(Color.Red, "Disconnected", true);
 
-							tabState = ConnectionState.Closed;
-						}
-						else
-						{
-							changeStatusBar(Color.DarkRed, "Error connecting to server", true);
+					            tabState = ConnectionState.Closed;
+					            break;
+					        default:
+					            ChangeStatusBar(Color.DarkRed, "Error connecting to server", true);
 
-							tabState = ConnectionState.Broken;
-						}
+					            tabState = ConnectionState.Broken;
+					            break;
+					    }
 					}
 
 					try
@@ -94,7 +89,7 @@ namespace BDAirportManager
 				}
 			});
 
-			statusLabelUpdater.Start();
+			_statusLabelUpdater.Start();
 
 		}
 
@@ -102,11 +97,11 @@ namespace BDAirportManager
 		{
 			if (dataGrid == null)
 			{
-				return sqlConnectionHandler.LoadNewData(sqlcomm, tableName);
+				return _sqlConnectionHandler.LoadNewData(sqlcomm, tableName);
 			}
 			else
 			{
-				dataGrid.DataSource = sqlConnectionHandler.LoadNewData(sqlcomm, tableName);
+				dataGrid.DataSource = _sqlConnectionHandler.LoadNewData(sqlcomm, tableName);
 
 				dataGrid.Update();
 				dataGrid.Refresh();
@@ -117,18 +112,17 @@ namespace BDAirportManager
 		private void AirplanesRefreshButton_Click(object sender, EventArgs e)
 		{
 			//Create a new command object
-			MySqlCommand sqlCommand = new MySqlCommand(
+			var sqlCommand = new MySqlCommand(
 				"SELECT airplaneID, stored_in, model, is_refuelled FROM airplane");
 
 			//Set int var for TryParse method
-			int hangar = 0;
 
-			//Start checking if boxes have content in them, and if they do, add appropriate param to sql command
+		    //Start checking if boxes have content in them, and if they do, add appropriate param to sql command
 			if (!string.IsNullOrEmpty(airplaneBox1.Text))
 			{
 				sqlCommand.AddWhereParameterClause("airplaneID", "@AirplaneID", airplaneBox1.Text);
 			}
-			if (!string.IsNullOrEmpty(airplaneBox2.Text) && Int32.TryParse(airplaneBox2.Text, out hangar))
+			if (!string.IsNullOrEmpty(airplaneBox2.Text) && int.TryParse(airplaneBox2.Text, out var hangar))
 			{
 				sqlCommand.AddWhereParameterClause("stored_in", "@StoredIn", hangar);
 			}
@@ -151,13 +145,10 @@ namespace BDAirportManager
 		private void HangarsRefreshButton_Click(object sender, EventArgs e)
 		{
 			// Does basically the same as airplane refresh button
-			MySqlCommand sqlCommand = new MySqlCommand(
+			var sqlCommand = new MySqlCommand(
 				"SELECT hangarID, location, capacity FROM hangar");
 
-			int hangarID = 0;
-			int capacity = 0;
-
-			if (!string.IsNullOrEmpty(hangarBox1.Text) && Int32.TryParse(hangarBox1.Text, out hangarID))
+		    if (!string.IsNullOrEmpty(hangarBox1.Text) && int.TryParse(hangarBox1.Text, out var hangarID))
 			{
 				sqlCommand.AddWhereParameterClause("hangarID", "@HangarID", hangarID);
 			}
@@ -165,7 +156,7 @@ namespace BDAirportManager
 			{
 				sqlCommand.AddWhereParameterClause("location", "@Location", hangarBox2.Text);
 			}
-			if (!string.IsNullOrEmpty(hangarBox3.Text) && Int32.TryParse(hangarBox3.Text, out capacity))
+			if (!string.IsNullOrEmpty(hangarBox3.Text) && int.TryParse(hangarBox3.Text, out var capacity))
 			{
 				sqlCommand.AddWhereParameterClause("capacity", "@Capacity", capacity);
 			}
@@ -176,22 +167,22 @@ namespace BDAirportManager
 
 		private void EmployeesRefreshButton_Click(object sender, EventArgs e)
 		{
-			string CmdText = null;
+			string cmdText = null;
 			
 			if (pilotCheckBox.Checked && !employeeCheckBox.Checked)
 			{
-				CmdText = "SELECT * FROM person RIGHT JOIN pilot ON person.pesel = pilot.pesel";
+				cmdText = "SELECT * FROM person RIGHT JOIN pilot ON person.pesel = pilot.pesel";
 			}
 			else if (!pilotCheckBox.Checked && employeeCheckBox.Checked)
 			{
-				CmdText = "SELECT * FROM person RIGHT JOIN employee ON person.pesel = employee.pesel";
+				cmdText = "SELECT * FROM person RIGHT JOIN employee ON person.pesel = employee.pesel";
 			}
 			else
 			{
-				CmdText = "SELECT pesel, name, address_city, phone, address_street, address_homenumber FROM person";
+				cmdText = "SELECT pesel, name, address_city, phone, address_street, address_homenumber FROM person";
 			}
 
-			MySqlCommand sqlCommand = new MySqlCommand(CmdText);
+			var sqlCommand = new MySqlCommand(cmdText);
 
 			if (!string.IsNullOrEmpty(employeeBox1.Text))
 			{
@@ -206,106 +197,85 @@ namespace BDAirportManager
 			UpdateDataGridOrGetDataTable(sqlCommand, "Employee", dataGridView3);
 		}
 
-		private void airplanesUpdateButton_Click(object sender, EventArgs e)
+	    private void MainScene_FormClosing(object sender, FormClosingEventArgs e)
 		{
-
+			_statusLabelUpdater.Abort();
 		}
 
-		private void hangarsUpdateButton_Click(object sender, EventArgs e)
+	    private struct ColumnMod
 		{
-
+			public string ColumnName;
+			public Label ValueLabel;
+			public Label WhereLabel;
+			public TextBox ValueTextBox;
+			public TextBox WhereTextBox;
+			public Panel ValuePanel;
+			public Panel WherePanel;
 		}
 
-		private void employeesUpdateButton_Click(object sender, EventArgs e)
-		{
-
-		}
-
-		private void MainScene_FormClosing(object sender, FormClosingEventArgs e)
-		{
-			statusLabelUpdater.Abort();
-		}
-
-		struct ColumnMod
-		{
-			public string columnName;
-			public Label valueLabel;
-			public Label whereLabel;
-			public TextBox valueTextBox;
-			public TextBox whereTextBox;
-			public Panel valuePanel;
-			public Panel wherePanel;
-		}
-
-		private List<ColumnMod> columnMods = new List<ColumnMod>();
+		private List<ColumnMod> _columnMods = new List<ColumnMod>();
 
 		private void comboBox1_SelectedValueChanged(object sender, EventArgs e)
 		{
-			string tableName = comboBox1.Text;
-			string CmdText = null;
+			var tableName = comboBox1.Text;
+			string cmdText = null;
 
-			if (columnMods.Any())
+			if (_columnMods.Any())
 			{
-				foreach (var item in columnMods)
+				foreach (var item in _columnMods)
 				{
 					//Remove controls
-					item.valuePanel.Controls.Remove(item.valueLabel);
-					item.wherePanel.Controls.Remove(item.whereLabel);
-					item.valuePanel.Controls.Remove(item.valueTextBox);
-					item.wherePanel.Controls.Remove(item.whereTextBox);
-					valuesFlowLayoutPanel.Controls.Remove(item.valuePanel);
-					whereFlowLayoutPanel.Controls.Remove(item.wherePanel);
+					item.ValuePanel.Controls.Remove(item.ValueLabel);
+					item.WherePanel.Controls.Remove(item.WhereLabel);
+					item.ValuePanel.Controls.Remove(item.ValueTextBox);
+					item.WherePanel.Controls.Remove(item.WhereTextBox);
+					valuesFlowLayoutPanel.Controls.Remove(item.ValuePanel);
+					whereFlowLayoutPanel.Controls.Remove(item.WherePanel);
 
-					item.valueLabel.Dispose();
-					item.whereLabel.Dispose();
-					item.valueTextBox.Dispose();
-					item.whereTextBox.Dispose();
-					item.valuePanel.Dispose();
-					item.wherePanel.Dispose();
+					item.ValueLabel.Dispose();
+					item.WhereLabel.Dispose();
+					item.ValueTextBox.Dispose();
+					item.WhereTextBox.Dispose();
+					item.ValuePanel.Dispose();
+					item.WherePanel.Dispose();
 				}
 
-				columnMods.Clear();
+				_columnMods.Clear();
 			}
 
 			if (tableName.Equals("pilot"))
 			{
-				CmdText = "SELECT * FROM pilot JOIN person";
+				cmdText = "SELECT * FROM pilot JOIN person";
 			}
 			else if (tableName.Equals("employee"))
 			{
-				CmdText = "SELECT * FROM employee JOIN person";
+				cmdText = "SELECT * FROM employee JOIN person";
 			}
 			else
 			{
-				CmdText = "SELECT * FROM " + tableName;
+				cmdText = "SELECT * FROM " + tableName;
 			}
 
-			MySqlCommand sqlCommand = new MySqlCommand(CmdText);
+			var sqlCommand = new MySqlCommand(cmdText);
 
-			DataTable dataTable = UpdateDataGridOrGetDataTable(sqlCommand, tableName);
-			columnMods = new List<ColumnMod>();
+			var dataTable = UpdateDataGridOrGetDataTable(sqlCommand, tableName);
+			_columnMods = new List<ColumnMod>();
 
 			foreach (DataColumn item in dataTable.Columns)
 			{
 				//Create two labels, one for value, one for where section
-				Label valueLabel = new Label();
-				valueLabel.Text = item.ColumnName;
+			    var valueLabel = new Label {Text = item.ColumnName};
 
-				Label whereLabel = new Label();
-				whereLabel.Text = item.ColumnName;
+			    var whereLabel = new Label {Text = item.ColumnName};
 
-				TextBox valueTextBox = new TextBox();
-				TextBox whereTextBox = new TextBox();
+			    var valueTextBox = new TextBox{Dock = DockStyle.Bottom};
+				var whereTextBox = new TextBox{Dock = DockStyle.Bottom};                
 
-				valueTextBox.Dock = DockStyle.Bottom;
-				whereTextBox.Dock = DockStyle.Bottom;
+				var valuePanel = new Panel();
+			    valuePanel.Controls.Add(valueLabel);
+			    valuePanel.Controls.Add(valueTextBox);
 
-				Panel valuePanel = new Panel();
-				Panel wherePanel = new Panel();
-
-				valuePanel.Controls.Add(valueLabel);
-				valuePanel.Controls.Add(valueTextBox);
-
+                var wherePanel = new Panel();
 				wherePanel.Controls.Add(whereLabel);
 				wherePanel.Controls.Add(whereTextBox);
 
@@ -315,17 +285,17 @@ namespace BDAirportManager
 				wherePanel.Width = 135;
 				wherePanel.Height = 45;
 
-				ColumnMod columnMod = new ColumnMod
+				var columnMod = new ColumnMod
 				{
-					columnName = item.ColumnName,
-					valueTextBox = valueTextBox,
-					whereTextBox = whereTextBox,
+					ColumnName = item.ColumnName,
+					ValueTextBox = valueTextBox,
+					WhereTextBox = whereTextBox,
 
-					valueLabel = valueLabel,
-					whereLabel = whereLabel,
+					ValueLabel = valueLabel,
+					WhereLabel = whereLabel,
 
-					valuePanel = valuePanel,
-					wherePanel = wherePanel
+					ValuePanel = valuePanel,
+					WherePanel = wherePanel
 				};
 
 				//Add everything to flow panels
@@ -333,49 +303,42 @@ namespace BDAirportManager
 				whereFlowLayoutPanel.Controls.Add(wherePanel);
 
 
-				columnMods.Add(columnMod);
+				_columnMods.Add(columnMod);
 			}
 		}
 
 		private void OptionSelectRadioButton1_CheckedChanged(object sender, EventArgs e)
 		{
-			if (optionSelectRadioButton1.Checked)
-			{
-				//On insert, disable the where container and enable the values container.
-				groupBox9.Enabled = false;
-				groupBox10.Enabled = true;
-			}
+		    if (!optionSelectRadioButton1.Checked) return;
+		    //On insert, disable the where container and enable the values container.
+		    groupBox9.Enabled = false;
+		    groupBox10.Enabled = true;
 
 		}
 
 		private void OptionSelectRadioButton2_CheckedChanged(object sender, EventArgs e)
 		{
-			if (optionSelectRadioButton2.Checked)
-			{
-				//On update, enable both containers
-				groupBox9.Enabled = true;
-				groupBox10.Enabled = true;
-			}
+		    if (!optionSelectRadioButton2.Checked) return;
+		    //On update, enable both containers
+		    groupBox9.Enabled = true;
+		    groupBox10.Enabled = true;
 		}
 
 		private void OptionSelectRadioButton3_CheckedChanged(object sender, EventArgs e)
 		{
-			if (optionSelectRadioButton3.Checked)
-			{
-				//On delete, only enable the where container
-				groupBox9.Enabled = true;
-				groupBox10.Enabled = false;
-			}
+		    if (!optionSelectRadioButton3.Checked) return;
+		    //On delete, only enable the where container
+		    groupBox9.Enabled = true;
+		    groupBox10.Enabled = false;
 
 		}
 
 		private void Button1_Click(object sender, EventArgs e)
 		{
-			string tableName = comboBox1.Text;
-			StringBuilder CmdText = new StringBuilder();
-			MySqlCommand sqlCommand = null;
+			var tableName = comboBox1.Text;
+			var CmdText = new StringBuilder();
 
-			if (tableName.Equals("pilot") || tableName.Equals("employee"))
+		    if (tableName.Equals("pilot") || tableName.Equals("employee"))
 			{
 				//If a double-table has been selected, everything has to happen for each table
 			}
@@ -387,27 +350,27 @@ namespace BDAirportManager
 					CmdText.Append("INSERT INTO " + tableName + "(");
 
 					//Start bulding values part
-					StringBuilder ValuesString = new StringBuilder("VALUES (");
+					var valuesString = new StringBuilder("VALUES (");
 
 					//Add names of all columns and values
-					foreach (ColumnMod column in columnMods)
+					foreach (var column in _columnMods)
 					{
-						if (columnMods.First().Equals(column))
+						if (_columnMods.First().Equals(column))
 						{
-							CmdText.Append(column.columnName);
-							ValuesString.Append("\"" + column.valueTextBox.Text + "\"");
+							CmdText.Append(column.ColumnName);
+							valuesString.Append("\"" + column.ValueTextBox.Text + "\"");
 							continue;
 						}
 						
-						CmdText.Append("," + column.columnName);
-						ValuesString.Append(",\"" + column.valueTextBox.Text + "\"");
+						CmdText.Append("," + column.ColumnName);
+						valuesString.Append(",\"" + column.ValueTextBox.Text + "\"");
 					}
 
 					//Add closing brace and connect two strings together
 					CmdText.Append(") ");
-					ValuesString.Append(");");
+					valuesString.Append(");");
 
-					CmdText.Append(ValuesString.ToString());
+					CmdText.Append(valuesString.ToString());
 				}
 				else if (optionSelectRadioButton2.Checked)
 				{
@@ -423,8 +386,8 @@ namespace BDAirportManager
 				}
 
 				//Once command is ready, build the MySqlCommand object
-				sqlCommand = new MySqlCommand(CmdText.ToString());
-				sqlConnectionHandler.PerformQuery(sqlCommand);
+				var sqlCommand = new MySqlCommand(CmdText.ToString());
+				_sqlConnectionHandler.PerformQuery(sqlCommand);
 			}
 
 		}

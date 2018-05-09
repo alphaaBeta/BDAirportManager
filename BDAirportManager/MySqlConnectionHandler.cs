@@ -8,19 +8,19 @@ using System.Threading.Tasks;
 
 namespace BDAirportManager
 {
-	class MySqlConnectionHandler
+    internal class MySqlConnectionHandler
 	{
-		private MySqlConnection _connection = new MySqlConnection();
-		private List<TableConnection> tables = new List<TableConnection>();
+	    private readonly List<TableConnection> _tables = new List<TableConnection>();
 
-		public MySqlConnection Connection { get => _connection; }
-		public ConnectionState ConnectionState { get => _connection.State; }
-		
-		struct TableConnection
+		public MySqlConnection Connection { get; private set; } = new MySqlConnection();
+
+	    public ConnectionState ConnectionState => Connection.State;
+
+	    private struct TableConnection
 		{
-			public MySqlDataAdapter dataAdapter;
-			public MySqlCommandBuilder commandBuilder;
-			public DataTable dataTable;
+			public MySqlDataAdapter DataAdapter;
+			public MySqlCommandBuilder CommandBuilder;
+			public DataTable DataTable;
 		}
 
 		public bool AttemptConnect(string hostname, int port, string login, string password, string database)
@@ -31,7 +31,7 @@ namespace BDAirportManager
 										+ "; port = " + port.ToString()
 										+ "; password = " + password;
 
-			MySqlConnection newConnection = new MySqlConnection(connectionString);
+			var newConnection = new MySqlConnection(connectionString);
 
 			try
 			{
@@ -44,7 +44,7 @@ namespace BDAirportManager
 			}
 
 			//Connection estabilished successfully
-			_connection = newConnection;
+			Connection = newConnection;
 
 			return true;
 		}
@@ -58,43 +58,39 @@ namespace BDAirportManager
 		public DataTable LoadNewData(MySqlCommand sqlCommand, string tableName)
 		{
 			//If a table alredy exists, return the data inside
-			if (tables.Any(x => (x.dataTable.TableName == tableName)) == true)
+			if (_tables.Any(x => (x.DataTable.TableName == tableName)) == true)
 			{
-				TableConnection aux = tables.Find(x => (x.dataTable.TableName == tableName));
+				var aux = _tables.Find(x => (x.DataTable.TableName == tableName));
 
 				sqlCommand.Connection = Connection;
-				aux.dataAdapter.SelectCommand = sqlCommand;
+				aux.DataAdapter.SelectCommand = sqlCommand;
 
-				aux.dataTable.Clear();
+				aux.DataTable.Clear();
 
-				aux.dataAdapter.Fill(aux.dataTable);
-				return aux.dataTable;
+				aux.DataAdapter.Fill(aux.DataTable);
+				return aux.DataTable;
 			}
 			
 			sqlCommand.Connection = Connection;
-			MySqlDataAdapter mySqlDataAdapter = new MySqlDataAdapter(sqlCommand);
-			MySqlCommandBuilder commandBuilder = new MySqlCommandBuilder(mySqlDataAdapter);
-			DataTable data = new DataTable();
+			var mySqlDataAdapter = new MySqlDataAdapter(sqlCommand);
+			var commandBuilder = new MySqlCommandBuilder(mySqlDataAdapter);
+			var data = new DataTable();
 
 
 			mySqlDataAdapter.Fill(data);
 			data.TableName = tableName;
 
-			TableConnection tableConnection = new TableConnection
+			var tableConnection = new TableConnection
 			{
-				dataAdapter = mySqlDataAdapter,
-				commandBuilder = commandBuilder,
-				dataTable = data
+				DataAdapter = mySqlDataAdapter,
+				CommandBuilder = commandBuilder,
+				DataTable = data
 			};
 
-			tables.Add(tableConnection);
+			_tables.Add(tableConnection);
 
 			return data;
 		}
-
-		public void UpdateData(DataTable data)
-		{
-
-		}
+        
 	}
 }
