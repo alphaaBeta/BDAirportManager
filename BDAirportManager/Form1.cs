@@ -432,6 +432,7 @@ namespace BDAirportManager
                 }
                 //Remove nulls or empty values from list
                 valuesList.RemoveAll(x => string.IsNullOrEmpty(x.Value));
+				conditionList.RemoveAll(x => string.IsNullOrEmpty(x.Value));
 
                 //Add queries
                 mySqlCommands.AddRange(MySqlCommandBuilder.CreateUpdateStatement(valuesList, conditionList));
@@ -475,6 +476,9 @@ namespace BDAirportManager
                 //Add queries              
                 mySqlCommands.AddRange(MySqlCommandBuilder.CreateDeleteStatement(conditionList));
             }
+
+			//Perform 'person' query first
+			mySqlCommands.Reverse();
 
             foreach (var mySqlCommand in mySqlCommands)
             {

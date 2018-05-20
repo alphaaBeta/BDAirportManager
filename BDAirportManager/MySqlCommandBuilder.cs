@@ -60,7 +60,8 @@ namespace BDAirportManager
                             .Distinct()
                             .ToList();
 
-            var returnedList = new List<MySqlCommand>();           
+            var returnedList = new List<MySqlCommand>();
+			var peselHappened = false;
 
             var cmdText = new StringBuilder("UPDATE " + string.Join(",", tableNames.ToArray()) + " SET ");
 
@@ -68,7 +69,7 @@ namespace BDAirportManager
             var valueChanges = new List<string>();
             foreach (var infoForQuery in valueList)
             {
-                valueChanges.Add(infoForQuery.TableName + "." + infoForQuery.ColumnName + " = " + infoForQuery.Value);
+                valueChanges.Add(infoForQuery.TableName + "." + infoForQuery.ColumnName + " = \"" + infoForQuery.Value + "\"");
             }
 
             //Add assignments with , as separator
@@ -79,7 +80,7 @@ namespace BDAirportManager
             //Add where clauses
             foreach (var infoForQuery in conditionList)
             {
-                mySqlCommand.AddWhereParameterClause(infoForQuery.ColumnName, "@" + infoForQuery.ColumnName.ToUpper(), infoForQuery.Value);
+                mySqlCommand.AddWhereParameterClause(infoForQuery.TableName + "." + infoForQuery.ColumnName, "@" + infoForQuery.ColumnName.ToUpper(), infoForQuery.Value);
             }
 
             returnedList.Add(mySqlCommand);
@@ -98,18 +99,28 @@ namespace BDAirportManager
                         .ToList();
             var mySqlCommands = new List<MySqlCommand>();
 
-            var cmdText = new StringBuilder("DELETE ");
             
-            //Create a section telling which columns to delete (all)
-            var tablesWithAsterisk = tableNames.Select(x => x + ".*").ToArray();
 
-            //Add it to cmd
-            cmdText.Append(string.Join(",", tablesWithAsterisk) + " FROM ");
+			foreach (var tableName in tableNames)
+			{
+				var cmdText = new StringBuilder("DELETE ");
 
-            //Add table names to cmd
-            cmdText.Append(string.Join(",", tableNames.ToArray()));
+				//Add it to cmd
+				cmdText.Append("FROM ");
 
-            mySqlCommands.Add(new MySqlCommand(cmdText.ToString()));
+				//Add table name to cmd
+				cmdText.Append(tableName + " ");
+
+				var mySqlCommand = new MySqlCommand(cmdText.ToString());
+
+				foreach (var infoForQuery in conditionList.Where(x=>x.TableName == tableName))
+				{
+					mySqlCommand.AddWhereParameterClause(infoForQuery.ColumnName, "@" + infoForQuery.ColumnName.ToUpper(), infoForQuery.Value);
+				}
+
+				mySqlCommands.Add(mySqlCommand);
+			}
+			
             return mySqlCommands;
 
         }

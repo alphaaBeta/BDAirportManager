@@ -15,7 +15,12 @@ namespace BDAirportManager.Extensions
                 sqlCommand.CommandText = sqlCommand.CommandText + " WHERE (" + columnName + "=" + parameterName + ")";
             }
 
-            sqlCommand.Parameters.AddWithValue(parameterName, parameterValue);
+			try
+			{
+				sqlCommand.Parameters.AddWithValue(parameterName, parameterValue);
+			}
+			catch(System.Exception)
+			{ }
         }
     }
 }
