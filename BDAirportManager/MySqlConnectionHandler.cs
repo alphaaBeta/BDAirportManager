@@ -8,20 +8,13 @@ using System.Threading.Tasks;
 
 namespace BDAirportManager
 {
-    internal class MySqlConnectionHandler
+    internal partial class MySqlConnectionHandler
 	{
-	    private readonly List<TableConnection> _tables = new List<TableConnection>();
+	    private readonly List<Model.MySqlConnectionHandler.TableConnection> _tables = new List<Model.MySqlConnectionHandler.TableConnection>();
 
-		public MySqlConnection Connection { get; private set; } = new MySqlConnection();
+	    private MySqlConnection Connection { get; set; } = new MySqlConnection();
 
 	    public ConnectionState ConnectionState => Connection.State;
-
-	    private struct TableConnection
-		{
-			public MySqlDataAdapter DataAdapter;
-			public MySqlCommandBuilder CommandBuilder;
-			public DataTable DataTable;
-		}
 
 		public bool AttemptConnect(string hostname, int port, string login, string password, string database)
 		{
@@ -49,7 +42,7 @@ namespace BDAirportManager
 			return true;
 		}
 
-		public object PerformQuery(MySqlCommand sqlCommand)
+		public object PerformQuery(MySqlCommand sqlCommand) 
 		{
 			sqlCommand.Connection = Connection;
 			return(sqlCommand.ExecuteScalar());
@@ -73,14 +66,14 @@ namespace BDAirportManager
 			
 			sqlCommand.Connection = Connection;
 			var mySqlDataAdapter = new MySqlDataAdapter(sqlCommand);
-			var commandBuilder = new MySqlCommandBuilder(mySqlDataAdapter);
+			var commandBuilder = new MySql.Data.MySqlClient.MySqlCommandBuilder();
 			var data = new DataTable();
 
 
 			mySqlDataAdapter.Fill(data);
 			data.TableName = tableName;
 
-			var tableConnection = new TableConnection
+			var tableConnection = new Model.MySqlConnectionHandler.TableConnection
 			{
 				DataAdapter = mySqlDataAdapter,
 				CommandBuilder = commandBuilder,
