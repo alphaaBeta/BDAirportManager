@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace BDAirportManager
 {
+	/// <summary>
+	/// Class used to handle and manage connection to database
+	/// </summary>
     internal partial class MySqlConnectionHandler
 	{
 	    private readonly List<Model.MySqlConnectionHandler.TableConnection> _tables = new List<Model.MySqlConnectionHandler.TableConnection>();
@@ -16,6 +19,15 @@ namespace BDAirportManager
 
 	    public ConnectionState ConnectionState => Connection.State;
 
+		/// <summary>
+		/// Attempt to connect to a database with given params
+		/// </summary>
+		/// <param name="hostname">Address of database server</param>
+		/// <param name="port">Database port</param>
+		/// <param name="login">Admin login</param>
+		/// <param name="password">Admin password</param>
+		/// <param name="database">Database name</param>
+		/// <returns></returns>
 		public bool AttemptConnect(string hostname, int port, string login, string password, string database)
 		{
 			string connectionString = "server = " + hostname
@@ -42,12 +54,23 @@ namespace BDAirportManager
 			return true;
 		}
 
+		/// <summary>
+		/// Sends query to database to perform it
+		/// </summary>
+		/// <param name="sqlCommand">Query to perform</param>
+		/// <returns></returns>
 		public object PerformQuery(MySqlCommand sqlCommand) 
 		{
 			sqlCommand.Connection = Connection;
 			return(sqlCommand.ExecuteScalar());
 		}
 
+		/// <summary>
+		/// Performs command and creates a datatable
+		/// </summary>
+		/// <param name="sqlCommand">Sql command to perform</param>
+		/// <param name="tableName">Tablename to store under in cache</param>
+		/// <returns></returns>
 		public DataTable LoadNewData(MySqlCommand sqlCommand, string tableName)
 		{
 			//If a table alredy exists, return the data inside

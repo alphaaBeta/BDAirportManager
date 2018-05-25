@@ -7,8 +7,16 @@ using MySql.Data.MySqlClient;
 
 namespace BDAirportManager
 {
+	/// <summary>
+	/// Class creating sql statements with given lists of data
+	/// </summary>
     static class MySqlCommandBuilder
     {
+		/// <summary>
+		/// Creates an insert statement with values from list
+		/// </summary>
+		/// <param name="valueList">List of objects InfoForQuery, containing values to input</param>
+		/// <returns></returns>
         public static IEnumerable<MySqlCommand> CreateInsertStatement(List<InfoForQuery> valueList)
         {
             //Get tableName
@@ -52,6 +60,12 @@ namespace BDAirportManager
 
         }
 
+		/// <summary>
+		/// Creates an update statement to given values with given conditions
+		/// </summary>
+		/// <param name="valueList">List of values to change to</param>
+		/// <param name="conditionList">List of conditions where to change values</param>
+		/// <returns></returns>
         public static IEnumerable<MySqlCommand> CreateUpdateStatement(List<InfoForQuery> valueList, List<InfoForQuery> conditionList)
         {
             //Get list of tables
@@ -90,6 +104,11 @@ namespace BDAirportManager
 
         }
 
+		/// <summary>
+		/// Creates a delete statement separately for every table with given conditions
+		/// </summary>
+		/// <param name="conditionList">List of conditions, which records to delete</param>
+		/// <returns></returns>
         public static IEnumerable<MySqlCommand> CreateDeleteStatement(List<InfoForQuery> conditionList)
         {
             //Get list of tables

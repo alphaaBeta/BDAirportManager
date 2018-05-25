@@ -14,10 +14,17 @@ namespace BDAirportManager
 {
     public partial class MainScene : Form
     {
+		/// <summary>
+		/// Reference to object maintaining connection
+		/// </summary>
         readonly MySqlConnectionHandler _sqlConnectionHandler;
-
+		/// <summary>
+		/// Thread used to update the connection status
+		/// </summary>
         private readonly Thread _statusLabelUpdater = null;
-
+		/// <summary>
+		/// Constructor
+		/// </summary>
         public MainScene()
         {
             InitializeComponent();
@@ -94,7 +101,13 @@ namespace BDAirportManager
             _statusLabelUpdater.Start();
 
         }
-
+		/// <summary>
+		/// Updates the data grid(on form) or gets the table from database and sets it
+		/// </summary>
+		/// <param name="sqlcomm">SqlCommand</param>
+		/// <param name="tableName">Name of the table in cache</param>
+		/// <param name="dataGrid">If no data grid exists, create a new one</param>
+		/// <returns></returns>
         private DataTable UpdateDataGridOrGetDataTable(MySqlCommand sqlcomm, string tableName, DataGridView dataGrid = null)
         {
             if (dataGrid == null)
@@ -110,8 +123,12 @@ namespace BDAirportManager
                 return null;
             }
         }
-
-        private void AirplanesRefreshButton_Click(object sender, EventArgs e)
+		/// <summary>
+		/// Refreshes airplane <see cref="DataGridView"/>
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void AirplanesRefreshButton_Click(object sender, EventArgs e)
         {
             //Create a new command object
             var sqlCommand = new MySqlCommand(
@@ -143,7 +160,11 @@ namespace BDAirportManager
             //Force an update with new command. This will download the data again.
             UpdateDataGridOrGetDataTable(sqlCommand, "Airplane", dataGridView1);
         }
-
+		/// <summary>
+		/// Refreshes hangar <see cref="DataGridView"/>
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
         private void HangarsRefreshButton_Click(object sender, EventArgs e)
         {
             // Does basically the same as airplane refresh button
@@ -166,8 +187,12 @@ namespace BDAirportManager
 
             UpdateDataGridOrGetDataTable(sqlCommand, "Hangar", dataGridView2);
         }
-
-        private void EmployeesRefreshButton_Click(object sender, EventArgs e)
+		/// <summary>
+		/// Refreshes employees <see cref="DataGridView"/>
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void EmployeesRefreshButton_Click(object sender, EventArgs e)
         {
             string cmdText = null;
 
@@ -198,7 +223,11 @@ namespace BDAirportManager
 
             UpdateDataGridOrGetDataTable(sqlCommand, "Employee", dataGridView3);
         }
-
+		/// <summary>
+		/// On form close, ends the status label updater thread
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
         private void MainScene_FormClosing(object sender, FormClosingEventArgs e)
         {
             //Stop the status label updater thread
@@ -207,7 +236,11 @@ namespace BDAirportManager
 
 
         private List<ColumnMod> _columnMods = new List<ColumnMod>();
-
+		/// <summary>
+		/// Adds columns to _columnMods when a specific table gets selected
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
         private void comboBox1_SelectedValueChanged(object sender, EventArgs e)
         {
             var tableName = comboBox1.Text;
@@ -324,7 +357,11 @@ namespace BDAirportManager
             groupBox10.Enabled = false;
 
         }
-
+		/// <summary>
+		/// Loads query arguments from _columnMods and performs the query with those arguments
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
         private void Button1_Click(object sender, EventArgs e)
         {
             var tableName = comboBox1.Text;
